@@ -26,6 +26,8 @@ if (det != 0):
     detb = sumxdouble * sumy - sumxy * sumx
     b = detb / det
 
+    print(a, b)
+
     def func(arg):
         return a*arg + b
 
