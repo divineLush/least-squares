@@ -1,5 +1,8 @@
 #include <iostream>
+#include <stdlib.h>
 #include <omp.h>
+
+// g++ -fopenmp main.cpp -o main
 
 int main() {
     const double points[5][2] = {
@@ -36,6 +39,7 @@ int main() {
         double const b = detb / det;
 
         std::cout << a << " " << b << '\n';
+        std::cout << rand() % 100 << '\n';
     } else {
         std::cout << "no solution" << '\n';
     }
