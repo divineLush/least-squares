@@ -6,7 +6,7 @@ def genCoord():
 
 
 rows = []
-pointsnum = randbelow(15) + 10
+pointsnum = randbelow(150) + 10
 
 for i in range(pointsnum):
     point = (genCoord(), genCoord())
