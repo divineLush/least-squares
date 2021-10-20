@@ -19,7 +19,7 @@ with open('output.csv') as file:
     for res in reader:
         func = lambda x : float(res[0])*x + float(res[1])
 
-        x = np.arange(0, 10, 0.01)
+        x = np.arange(0, 45, 0.01)
         y = list(map(func, x))
 
         plt.plot(x, y, color='green')
@@ -30,7 +30,7 @@ randsign = lambda : 1 if bool(getrandbits(1)) else -1
 randa, randb = randbelow(10) * randsign(), randbelow(10) * randsign()
 randline = lambda x : randa*x + randb
 
-x = np.arange(0, 10, 0.01)
+x = np.arange(0, 45, 0.01)
 y = list(map(randline, x))
 
 plt.plot(x, y, color='turquoise')

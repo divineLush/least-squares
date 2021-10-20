@@ -1,17 +1,31 @@
 #include <iostream>
+#include <typeinfo>
+#include <fstream>
+#include <vector>
 #include <stdlib.h>
 #include <omp.h>
 
 // g++ -fopenmp main.cpp -o main
 
 int main() {
-    const double points[5][2] = {
-        {1, 5.3},
-        {2, 6.3},
-        {3, 4.8},
-        {4, 3.8},
-        {5, 3.3}
-    };
+    std::ifstream input ("input.csv");
+    std::vector<std::vector<int>> points;
+
+    // read from input.csv
+    if (input.is_open()) {
+        std::string line;
+
+        while(std::getline(input, line)) {
+            std::size_t pos = line.find(",");
+
+            int x = std::stoi(line.substr(0, pos));
+            int y = std::stoi(line.substr(pos + 1));
+
+            points.push_back({ x, y });
+        }
+    }
+    input.close();
+
 
     double sumx = 0;
     double sumy = 0;
@@ -19,7 +33,7 @@ int main() {
     double sumxy = 0;
 
     int i;
-    int const len = sizeof(points) / sizeof(points[0]);
+    const int len = points.size();
 
     #pragma omp parallel for private(i) reduction(+:sumx, sumy, sumxy, sumxdouble)
         for (i = 0; i < len; i++) {
@@ -39,7 +53,13 @@ int main() {
         double const b = detb / det;
 
         std::cout << a << " " << b << '\n';
-        std::cout << rand() % 100 << '\n';
+
+        std::ofstream output ("output.csv");
+        if (output.is_open()) {
+            output << a << "," << b << "\n";
+        }
+        output.close();
+
     } else {
         std::cout << "no solution" << '\n';
     }

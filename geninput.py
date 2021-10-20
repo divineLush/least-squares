@@ -1,15 +1,12 @@
 import csv
 from secrets import randbelow
 
-def genCoord():
-    return randbelow(50) + randbelow(50) + 1
-
 
 rows = []
 pointsnum = randbelow(150) + 10
 
 for i in range(pointsnum):
-    point = (genCoord(), genCoord())
+    point = (randbelow(100), randbelow(100))
     rows.append(point)
 
 
